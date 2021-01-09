@@ -25,13 +25,13 @@ namespace COVID.Dashboard.Buisness.Implementation
             var client = _apiClient.GetRestClient();
             var request = _apiClient.GetRestRequest("reports");
             var response = client.Get<ReportDataDTO>(request);
-            var filtererData = response.Data.Data.OrderByDescending(d => d.Confirmed) // Order data by confirmed cases
+            var filtererData = response.Data.Data // Order data by confirmed cases
                 .GroupBy(x => new {x.Region.Iso, x.Region.Name}) // Group Data by region
                 .ToDictionary(group => group.Key,
                     group =>
                         group.Sum(item => item.Confirmed)) // take grouped data an convert in <IsoCode, TotalCases> 
-                .Take(10)
                 .OrderByDescending(x => x.Value)
+                .Take(10)
                 .ToDictionary(x => new IsoRegionModel() {Iso = x.Key.Iso, RegionName = x.Key.Name}, x => x.Value);
             return new Dictionary<IsoRegionModel, int>();
         }
