@@ -36,6 +36,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,7 +54,16 @@
     <Compile Include="Interface\IReportService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\COVID.Dashboard.ApiClient\COVID.Dashboard.ApiClient.csproj">
+      <Project>{da603fbe-5163-4676-a038-ba3aa034227e}</Project>
+      <Name>COVID.Dashboard.ApiClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\COVID.Dashboard.Models\COVID.Dashboard.Models.csproj">
+      <Project>{08184037-6cbf-4619-ad36-3a7dc7694473}</Project>
+      <Name>COVID.Dashboard.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

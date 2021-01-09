@@ -316,6 +316,14 @@
       <Project>{da603fbe-5163-4676-a038-ba3aa034227e}</Project>
       <Name>COVID.Dashboard.ApiClient</Name>
     </ProjectReference>
+    <ProjectReference Include="..\COVID.Dashboard.Buisness\COVID.Dashboard.Buisness.csproj">
+      <Project>{cdc631a4-7ae3-4235-a80e-d3c7b5a4c1ed}</Project>
+      <Name>COVID.Dashboard.Buisness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\COVID.Dashboard.Models\COVID.Dashboard.Models.csproj">
+      <Project>{08184037-6CBF-4619-AD36-3A7DC7694473}</Project>
+      <Name>COVID.Dashboard.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -5,20 +5,22 @@ using System.Web;
 using System.Web.Mvc;
 using COVID.Dashboard.ApiClient;
 using COVID.Dashboard.ApiClient.Interface;
+using COVID.Dashboard.Buisness.Interface;
 
 namespace COVID.Dashboard.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IApiClient _apiClient;
+        private readonly IReportService _reportService;
 
-        public HomeController(IApiClient apiClient)
+        public HomeController(IReportService reportService)
         {
-            _apiClient = apiClient;
+            _reportService = reportService;
         }
 
         public ActionResult Index()
         {
+            var result = _reportService.GetTop10RegionsMostCovidCases();
             return View();
         }
 

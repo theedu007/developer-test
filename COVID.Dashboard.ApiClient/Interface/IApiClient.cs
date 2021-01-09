@@ -9,6 +9,8 @@ namespace COVID.Dashboard.ApiClient.Interface
 {
     public interface IApiClient
     {
-        RestClient GetRestClient(string endpoint);
+        RestClient GetRestClient();
+
+        RestRequest GetRestRequest(string endpoint);
     }
 }

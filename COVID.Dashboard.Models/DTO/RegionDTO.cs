@@ -12,6 +12,6 @@ namespace COVID.Dashboard.Models.DTO
         public string Name { get; set; }
         public string Province { get; set; }
         public string Lat { get; set; }
-        public long Long { get; set; }
+        public string Long { get; set; }
     }
 }
