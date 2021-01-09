@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using COVID.Dashboard.ApiClient;
 using COVID.Dashboard.ApiClient.Interface;
 using COVID.Dashboard.Buisness.Interface;
+using COVID.Dashboard.Models;
 
 namespace COVID.Dashboard.Controllers
 {
@@ -20,8 +21,8 @@ namespace COVID.Dashboard.Controllers
 
         public ActionResult Index()
         {
-            var result = _reportService.GetTop10RegionsMostCovidCases();
-            return View();
+            var viewData = _reportService.GetTop10RegionsMostCovidCases();
+            return View(new CovidDataViewModel() {Top10RegionsData = viewData});
         }
 
         public ActionResult About()
