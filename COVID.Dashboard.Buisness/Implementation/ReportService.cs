@@ -20,7 +20,7 @@ namespace COVID.Dashboard.Buisness.Implementation
             _apiClient = apiClient;
         }
 
-        public Dictionary<IsoRegionModel, int> GetTop10RegionsMostCovidCases()
+        public Dictionary<IsoRegionModel, CasesDeathModel> GetTop10RegionsMostCovidCases()
         {
             var client = _apiClient.GetRestClient();
             var request = _apiClient.GetRestRequest("reports");
@@ -28,12 +28,15 @@ namespace COVID.Dashboard.Buisness.Implementation
             var filtererData = response.Data.Data // Order data by confirmed cases
                 .GroupBy(x => new {x.Region.Iso, x.Region.Name}) // Group Data by region
                 .ToDictionary(group => group.Key,
-                    group =>
-                        group.Sum(item => item.Confirmed)) // take grouped data an convert in <IsoCode, TotalCases> 
-                .OrderByDescending(x => x.Value)
+                    group => new CasesDeathModel()
+                    {
+                        Cases = group.Sum(item => item.Confirmed),
+                        Deaths = group.Sum(item => item.Deaths)
+                    }) // take grouped data an convert in <IsoCode, TotalCases> 
+                .OrderByDescending(x => x.Value.Cases)
                 .Take(10)
                 .ToDictionary(x => new IsoRegionModel() {Iso = x.Key.Iso, RegionName = x.Key.Name}, x => x.Value);
-            return new Dictionary<IsoRegionModel, int>();
+            return filtererData;
         }
     }
 }

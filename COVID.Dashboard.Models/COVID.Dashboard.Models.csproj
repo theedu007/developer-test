@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auxiliary\CasesDeathModel.cs" />
     <Compile Include="Auxiliary\IsoRegionModel.cs" />
     <Compile Include="DTO\RegionDTO.cs" />
     <Compile Include="DTO\ReportDataDTO.cs" />
