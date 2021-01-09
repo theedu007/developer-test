@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using COVID.Dashboard.App_Start;
 
 namespace COVID.Dashboard
 {
@@ -13,6 +14,7 @@ namespace COVID.Dashboard
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            AutofacConfig.Config();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
