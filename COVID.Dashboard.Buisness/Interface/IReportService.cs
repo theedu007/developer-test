@@ -10,8 +10,8 @@ namespace COVID.Dashboard.Buisness.Interface
 {
     public interface IReportService
     {
-        Dictionary<IsoRegionModel, CasesDeathModel> GetTop10RegionsMostCovidCases();
+        Dictionary<IsoRegionModel, CasesDeathModel> GetTop10CovidCasesByCountry();
 
-        Dictionary<ProvinceIsoModel, CasesDeathModel> GetTop10CovidCasesProvincesByRegion(string iso);
+        Dictionary<ProvinceIsoModel, CasesDeathModel> GetTop10CovidCasesByCountryRegions(string iso);
     }
 }

@@ -38,7 +38,7 @@ namespace COVID.Dashboard.Tests.Services
 
             var reportService = new ReportService(apiClient.Object);
 
-            var result = reportService.GetTop10RegionsMostCovidCases();
+            var result = reportService.GetTop10CovidCasesByCountry();
             
             Assert.IsInstanceOf<Dictionary<IsoRegionModel,CasesDeathModel>>(result);
         }
@@ -63,7 +63,7 @@ namespace COVID.Dashboard.Tests.Services
 
             var reportService = new ReportService(apiClient.Object);
 
-            Assert.Throws<ApiClientException>(() => reportService.GetTop10RegionsMostCovidCases());
+            Assert.Throws<ApiClientException>(() => reportService.GetTop10CovidCasesByCountry());
         }
 
         [TestCase]
@@ -91,7 +91,7 @@ namespace COVID.Dashboard.Tests.Services
 
             var reportService = new ReportService(apiClient.Object);
 
-            var result = reportService.GetTop10CovidCasesProvincesByRegion("US");
+            var result = reportService.GetTop10CovidCasesByCountryRegions("US");
 
             Assert.IsInstanceOf<Dictionary<ProvinceIsoModel, CasesDeathModel>>(result);
         }
@@ -116,7 +116,7 @@ namespace COVID.Dashboard.Tests.Services
 
             var reportService = new ReportService(apiClient.Object);
 
-            Assert.Throws<ApiClientException>(() => reportService.GetTop10CovidCasesProvincesByRegion("US"));
+            Assert.Throws<ApiClientException>(() => reportService.GetTop10CovidCasesByCountryRegions("US"));
         }
 
     }

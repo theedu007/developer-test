@@ -21,7 +21,7 @@ namespace COVID.Dashboard.Buisness.Implementation
             _apiClient = apiClient;
         }
 
-        public Dictionary<IsoRegionModel, CasesDeathModel> GetTop10RegionsMostCovidCases()
+        public Dictionary<IsoRegionModel, CasesDeathModel> GetTop10CovidCasesByCountry()
         {
             var client = _apiClient.GetRestClient();
             var request = _apiClient.GetRestRequest("reports");
@@ -46,7 +46,7 @@ namespace COVID.Dashboard.Buisness.Implementation
             return filtererData;
         }
 
-        public Dictionary<ProvinceIsoModel, CasesDeathModel> GetTop10CovidCasesProvincesByRegion(string iso)
+        public Dictionary<ProvinceIsoModel, CasesDeathModel> GetTop10CovidCasesByCountryRegions(string iso)
         {
             var client = _apiClient.GetRestClient();
             var request = _apiClient.GetRestRequest("reports");

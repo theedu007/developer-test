@@ -25,7 +25,7 @@ namespace COVID.Dashboard.Controllers
             var model = new CovidDataViewModel();
             try
             {
-                var viewData = _reportService.GetTop10RegionsMostCovidCases();
+                var viewData = _reportService.GetTop10CovidCasesByCountry();
 
                 model.Top10RegionsData = viewData.ToDictionary(x => x.Key.RegionName, x => x.Value);
                 model.OptionsList = viewData
@@ -49,12 +49,12 @@ namespace COVID.Dashboard.Controllers
             {
                 if (string.IsNullOrEmpty(iso))
                 {
-                    var viewData = _reportService.GetTop10RegionsMostCovidCases();
+                    var viewData = _reportService.GetTop10CovidCasesByCountry();
                     model.Top10RegionsData = viewData.ToDictionary(x => x.Key.RegionName, x => x.Value);
                 }
                 else
                 {
-                    var viewData = _reportService.GetTop10CovidCasesProvincesByRegion(iso);
+                    var viewData = _reportService.GetTop10CovidCasesByCountryRegions(iso);
                     model.Top10RegionsData = viewData.ToDictionary(x => x.Key.Province, x => x.Value);
                 }
                 return PartialView("TableDashboard", model);

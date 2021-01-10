@@ -21,7 +21,7 @@ namespace COVID.Dashboard.Tests.Controllers
                 new CasesDeathModel() {Cases = 1, Deaths = 1});
             
             var reportService = new Mock<IReportService>();
-            reportService.Setup(x => x.GetTop10RegionsMostCovidCases())
+            reportService.Setup(x => x.GetTop10CovidCasesByCountry())
                 .Returns(() => dictionary);
 
             var controller = new DownloadController(reportService.Object);
@@ -42,7 +42,7 @@ namespace COVID.Dashboard.Tests.Controllers
                 new CasesDeathModel() { Cases = 1, Deaths = 1 });
 
             var reportService = new Mock<IReportService>();
-            reportService.Setup(x => x.GetTop10CovidCasesProvincesByRegion(It.IsAny<string>()))
+            reportService.Setup(x => x.GetTop10CovidCasesByCountryRegions(It.IsAny<string>()))
                 .Returns(() => dictionary);
 
             var controller = new DownloadController(reportService.Object);
@@ -57,7 +57,7 @@ namespace COVID.Dashboard.Tests.Controllers
         public void GetJson_ApiClientThrowsException_ShouldReturnEmptyResult()
         {
             var reportService = new Mock<IReportService>();
-            reportService.Setup(x => x.GetTop10RegionsMostCovidCases())
+            reportService.Setup(x => x.GetTop10CovidCasesByCountry())
                 .Throws(new ApiClientException("test message"));
 
             var controller = new DownloadController(reportService.Object);
@@ -75,7 +75,7 @@ namespace COVID.Dashboard.Tests.Controllers
                 new CasesDeathModel() { Cases = 1, Deaths = 1 });
 
             var reportService = new Mock<IReportService>();
-            reportService.Setup(x => x.GetTop10RegionsMostCovidCases())
+            reportService.Setup(x => x.GetTop10CovidCasesByCountry())
                 .Returns(() => dictionary);
 
             var controller = new DownloadController(reportService.Object);
@@ -96,7 +96,7 @@ namespace COVID.Dashboard.Tests.Controllers
                 new CasesDeathModel() { Cases = 1, Deaths = 1 });
 
             var reportService = new Mock<IReportService>();
-            reportService.Setup(x => x.GetTop10CovidCasesProvincesByRegion(It.IsAny<string>()))
+            reportService.Setup(x => x.GetTop10CovidCasesByCountryRegions(It.IsAny<string>()))
                 .Returns(() => dictionary);
 
             var controller = new DownloadController(reportService.Object);
@@ -111,7 +111,7 @@ namespace COVID.Dashboard.Tests.Controllers
         public void GetCsv_ApiClientThrowsException_ShouldReturnEmptyResult()
         {
             var reportService = new Mock<IReportService>();
-            reportService.Setup(x => x.GetTop10RegionsMostCovidCases())
+            reportService.Setup(x => x.GetTop10CovidCasesByCountry())
                 .Throws(new ApiClientException("test message"));
 
             var controller = new DownloadController(reportService.Object);
@@ -129,7 +129,7 @@ namespace COVID.Dashboard.Tests.Controllers
                 new CasesDeathModel() { Cases = 1, Deaths = 1 });
 
             var reportService = new Mock<IReportService>();
-            reportService.Setup(x => x.GetTop10RegionsMostCovidCases())
+            reportService.Setup(x => x.GetTop10CovidCasesByCountry())
                 .Returns(() => dictionary);
 
             var controller = new DownloadController(reportService.Object);
@@ -150,7 +150,7 @@ namespace COVID.Dashboard.Tests.Controllers
                 new CasesDeathModel() { Cases = 1, Deaths = 1 });
 
             var reportService = new Mock<IReportService>();
-            reportService.Setup(x => x.GetTop10CovidCasesProvincesByRegion(It.IsAny<string>()))
+            reportService.Setup(x => x.GetTop10CovidCasesByCountryRegions(It.IsAny<string>()))
                 .Returns(() => dictionary);
 
             var controller = new DownloadController(reportService.Object);
@@ -165,7 +165,7 @@ namespace COVID.Dashboard.Tests.Controllers
         public void GetXml_ApiClientThrowsException_ShouldReturnEmptyResult()
         {
             var reportService = new Mock<IReportService>();
-            reportService.Setup(x => x.GetTop10RegionsMostCovidCases())
+            reportService.Setup(x => x.GetTop10CovidCasesByCountry())
                 .Throws(new ApiClientException("test message"));
 
             var controller = new DownloadController(reportService.Object);

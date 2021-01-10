@@ -35,7 +35,7 @@ namespace COVID.Dashboard.Controllers
 
                 if (string.IsNullOrEmpty(iso))
                 {
-                    var dataDictionary = _reportService.GetTop10RegionsMostCovidCases();
+                    var dataDictionary = _reportService.GetTop10CovidCasesByCountry();
                     var newDataDictionay = dataDictionary
                         .ToDictionary(x => x.Key.RegionName, x => x.Value);
                     var bytes = FormatingService.GeJsonBytes(newDataDictionay);
@@ -44,7 +44,7 @@ namespace COVID.Dashboard.Controllers
                 }
                 else
                 {
-                    var dataDictionary = _reportService.GetTop10CovidCasesProvincesByRegion(iso);
+                    var dataDictionary = _reportService.GetTop10CovidCasesByCountryRegions(iso);
                     var newDataDictionary = dataDictionary
                         .ToDictionary(x => x.Key.Province, x => x.Value);
                     var bytes = FormatingService.GeJsonBytes(newDataDictionary);
@@ -71,7 +71,7 @@ namespace COVID.Dashboard.Controllers
 
                 if (string.IsNullOrEmpty(iso))
                 {
-                    var dataDictionary = _reportService.GetTop10RegionsMostCovidCases();
+                    var dataDictionary = _reportService.GetTop10CovidCasesByCountry();
                     var newDataDictionay = dataDictionary
                         .ToDictionary(x => x.Key.RegionName, x => x.Value);
                     bytes = FormatingService.GetCvsBytes(newDataDictionay);
@@ -79,7 +79,7 @@ namespace COVID.Dashboard.Controllers
                 }
                 else
                 {
-                    var dataDictionary = _reportService.GetTop10CovidCasesProvincesByRegion(iso);
+                    var dataDictionary = _reportService.GetTop10CovidCasesByCountryRegions(iso);
                     var newDataDictionary = dataDictionary
                         .ToDictionary(x => x.Key.Province, x => x.Value);
                     bytes = FormatingService.GetCvsBytes(newDataDictionary);
@@ -104,14 +104,14 @@ namespace COVID.Dashboard.Controllers
 
                 if (string.IsNullOrEmpty(iso))
                 {
-                    var dataDictionary = _reportService.GetTop10RegionsMostCovidCases()
+                    var dataDictionary = _reportService.GetTop10CovidCasesByCountry()
                         .ToDictionary(x => x.Key.RegionName, x => x.Value); ;
                     bytes = FormatingService.GetXmlBytes(dataDictionary, "Cases");
                     filename = fileNameForCountry;
                 }
                 else
                 {
-                    var dataDictionary = _reportService.GetTop10CovidCasesProvincesByRegion(iso)
+                    var dataDictionary = _reportService.GetTop10CovidCasesByCountryRegions(iso)
                         .ToDictionary(x => x.Key.Province, x => x.Value);
                     bytes = FormatingService.GetXmlBytes(dataDictionary, "Cases");
                     filename = fileNameForProvince;
