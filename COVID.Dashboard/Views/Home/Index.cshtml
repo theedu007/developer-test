@@ -13,9 +13,9 @@
                 method: "GET",
                 data: { iso: $("#select-list").val() },
                 success: (respose) => {
-                    const tableArea = $("#table-row");
+                    const tableArea = $("#table-area");
                     tableArea.empty();
-                    tableArea.append(respose);
+                    tableArea.append(respose);
                 }
             });
         });
@@ -32,20 +32,15 @@
             <div class="col-8">
                 @Html.DropDownListFor(m => m.IsoCode,
                     Model.OptionsList,
-                    "Regions",
-                    new { @class = "form-control", id = "select-list"})
+                    "By Country",
+                    new { @class = "form-control", id = "select-list" })
             </div>
             <div class="col-2">
                 <button class="btn btn-primary" id="report-button">report</button>
             </div>
         </div>
     </div>
-    <div class="col">
-        @Html.ActionLink("XML", "GetXmlForRegion", "Download", null, new {@class = "btn btn-primary"})
-        @Html.ActionLink("JSON", "GetJsonFileForRegion", "Download", null, new {@class = "btn btn-primary"})
-        @Html.ActionLink("CSV", "GetCvsForRegion", "Download", null, new {@class = "btn  btn-primary" })
-    </div>
 </div>
-<div class="row mt-2" id="table-row">
+<div id="table-area">
     @{ Html.RenderPartial("TableDashboard", Model); }
 </div>

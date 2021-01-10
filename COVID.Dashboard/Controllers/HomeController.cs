@@ -34,9 +34,19 @@ namespace COVID.Dashboard.Controllers
         [HttpGet]
         public ActionResult GetDashboardByProvincePartialView(string iso)
         {
-            var viewData = _reportService.GetTop10CovidCasesProvincesByRegion(iso);
             var model = new CovidDataViewModel();
-            model.Top10RegionsData = viewData.ToDictionary(x => x.Key.Province, x => x.Value);
+            model.IsoCode = iso;
+
+            if (string.IsNullOrEmpty(iso))
+            {
+                var viewData = _reportService.GetTop10RegionsMostCovidCases();
+                model.Top10RegionsData = viewData.ToDictionary(x => x.Key.RegionName, x => x.Value);
+            }
+            else
+            {
+                var viewData = _reportService.GetTop10CovidCasesProvincesByRegion(iso);
+                model.Top10RegionsData = viewData.ToDictionary(x => x.Key.Province, x => x.Value);
+            }
             return PartialView("TableDashboard", model);
         }
     }

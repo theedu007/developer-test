@@ -14,6 +14,8 @@ namespace COVID.Dashboard.Controllers
     public class DownloadController : Controller
     {
         private readonly IReportService _reportService;
+        private const string fileNameForCountry = "CasesByCountry";
+        private const string fileNameForProvince = "CasesByCountryProvidence";
 
         public DownloadController(IReportService reportService)
         {
@@ -22,36 +24,80 @@ namespace COVID.Dashboard.Controllers
         // GET: Download
 
         [HttpGet]
-        public ActionResult GetJsonFileForRegion()
+        public ActionResult GetJsonFileForRegion(string iso)
         {
-            var dataDictionary = _reportService.GetTop10RegionsMostCovidCases();
-            var newDataDictionay = dataDictionary
-                .ToDictionary(x => x.Key.RegionName, x => x.Value);
-            var bytes = FormatingService.GeJsonBytes(newDataDictionay);
-            var content = new MemoryStream(bytes);
+            var content = new MemoryStream();
+            var filename = "";
 
-            return File(content, "application/json", "CovidCasesByRegion.json");
+            if (string.IsNullOrEmpty(iso))
+            {
+                var dataDictionary = _reportService.GetTop10RegionsMostCovidCases();
+                var newDataDictionay = dataDictionary
+                    .ToDictionary(x => x.Key.RegionName, x => x.Value);
+                var bytes = FormatingService.GeJsonBytes(newDataDictionay);
+                content = new MemoryStream(bytes);
+                filename = fileNameForCountry;
+            }
+            else
+            {
+                var dataDictionary = _reportService.GetTop10CovidCasesProvincesByRegion(iso);
+                var newDataDictionary = dataDictionary
+                    .ToDictionary(x => x.Key.Province, x => x.Value);
+                var bytes = FormatingService.GeJsonBytes(newDataDictionary);
+                content = new MemoryStream(bytes);
+                filename = fileNameForProvince;
+            }
+
+            return File(content, "application/json", $"{filename}.json");
         }
 
         [HttpGet]
-        public ActionResult GetCvsForRegion()
+        public ActionResult GetCvsForRegion(string iso)
         {
-            var dataDictionary = _reportService.GetTop10RegionsMostCovidCases();
-            var newDataDictionay = dataDictionary
-                .ToDictionary(x => x.Key.RegionName, x => x.Value);
-            var bytes = FormatingService.GetCvsBytes(newDataDictionay);
+            var bytes = new byte[0];
+            var filename = "";
 
-            return File(bytes, "text/csv", "CovidCasesByRegion.csv");
+            if (string.IsNullOrEmpty(iso))
+            {
+                var dataDictionary = _reportService.GetTop10RegionsMostCovidCases();
+                var newDataDictionay = dataDictionary
+                    .ToDictionary(x => x.Key.RegionName, x => x.Value);
+                bytes = FormatingService.GetCvsBytes(newDataDictionay);
+                filename = fileNameForCountry;
+            }
+            else
+            {
+                var dataDictionary = _reportService.GetTop10CovidCasesProvincesByRegion(iso);
+                var newDataDictionary = dataDictionary
+                    .ToDictionary(x => x.Key.Province, x => x.Value);
+                bytes = FormatingService.GetCvsBytes(newDataDictionary);
+                filename = fileNameForProvince;
+            }
+
+            return File(bytes, "text/csv", $"{filename}.csv");
         }
 
         [HttpGet]
-        public ActionResult GetXmlForRegion()
+        public ActionResult GetXmlForRegion(string iso)
         {
-            var dataDictionary = _reportService.GetTop10RegionsMostCovidCases()
-                .ToDictionary(x => x.Key.RegionName, x => x.Value); ;
-            var bytes = FormatingService.GetXmlBytes(dataDictionary, "Cases");
+            var bytes = new byte[0];
+            var filename = "";
 
-            return File(bytes, "application/xml", "CovidCasesByRegion.xml");
+            if (string.IsNullOrEmpty(iso))
+            {
+                var dataDictionary = _reportService.GetTop10RegionsMostCovidCases()
+                    .ToDictionary(x => x.Key.RegionName, x => x.Value); ;
+                bytes = FormatingService.GetXmlBytes(dataDictionary, "Cases");
+                filename = fileNameForCountry;
+            }
+            else
+            {
+                var dataDictionary = _reportService.GetTop10CovidCasesProvincesByRegion(iso)
+                    .ToDictionary(x => x.Key.Province, x => x.Value);
+                bytes = FormatingService.GetXmlBytes(dataDictionary, "Cases");
+                filename = fileNameForProvince;
+            }
+            return File(bytes, "application/xml", $"{filename}.xml");
         }
     }
 }
