@@ -54,9 +54,8 @@ namespace COVID.Dashboard.Controllers
 
                 return File(content, "application/json", $"{filename}.json");
             }
-            catch (ApiClientException ex)
+            catch (ApiClientException)
             {
-                Response.Status = HttpStatusCode.InternalServerError.ToString();
                 return new EmptyResult();
             }
 
@@ -89,9 +88,8 @@ namespace COVID.Dashboard.Controllers
 
                 return File(bytes, "text/csv", $"{filename}.csv");
             }
-            catch (ApiClientException ex)
+            catch (ApiClientException)
             {
-                Response.Status = HttpStatusCode.InternalServerError.ToString();
                 return new EmptyResult();
             }
         }
@@ -120,9 +118,8 @@ namespace COVID.Dashboard.Controllers
                 }
                 return File(bytes, "application/xml", $"{filename}.xml");
             }
-            catch (ApiClientException ex)
+            catch (ApiClientException)
             {
-                Response.Status = HttpStatusCode.InternalServerError.ToString();
                 return new EmptyResult();
             }
         }
