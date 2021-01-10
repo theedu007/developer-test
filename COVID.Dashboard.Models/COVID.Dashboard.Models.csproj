@@ -47,7 +47,6 @@
     <Compile Include="DTO\RegionDTO.cs" />
     <Compile Include="DTO\ReportDataDTO.cs" />
     <Compile Include="DTO\ReportDTO.cs" />
-    <Compile Include="Models\Region.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
