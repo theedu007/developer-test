@@ -3,7 +3,7 @@
 namespace COVID.Dashboard.Tests.Services
 {
     [TestFixture]
-    class ReportServiceTests
+    public class ReportServiceTests
     {
     }
 }

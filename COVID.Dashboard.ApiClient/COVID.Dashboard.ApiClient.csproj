@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="ApiConfig\ApiConfig.cs" />
     <Compile Include="ApiConfig\ApiConfigSection.cs" />
+    <Compile Include="Exception\ApiClientException.cs" />
     <Compile Include="Implementation\ApiClient.cs" />
     <Compile Include="Interface\IApiClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,5 +82,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

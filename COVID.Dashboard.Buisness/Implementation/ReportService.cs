@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using COVID.Dashboard.ApiClient.Exception;
 using COVID.Dashboard.ApiClient.Interface;
 using COVID.Dashboard.Buisness.Interface;
 using COVID.Dashboard.Models.Auxiliary;
@@ -25,6 +26,12 @@ namespace COVID.Dashboard.Buisness.Implementation
             var client = _apiClient.GetRestClient();
             var request = _apiClient.GetRestRequest("reports");
             var response = client.Get<ReportDataDTO>(request);
+
+            if (!response.IsSuccessful)
+            {
+                throw new ApiClientException("There was an error in request data from endpoint");
+            }
+
             var filtererData = response.Data.Data // Order data by confirmed cases
                 .GroupBy(x => new {x.Region.Iso, x.Region.Name}) // Group Data by region
                 .ToDictionary(group => group.Key,
@@ -45,6 +52,12 @@ namespace COVID.Dashboard.Buisness.Implementation
             var request = _apiClient.GetRestRequest("reports");
             request.AddParameter("iso", iso, ParameterType.QueryString);
             var response = client.Get<ReportDataDTO>(request);
+
+            if (!response.IsSuccessful)
+            {
+                throw new ApiClientException("There was an error in request data from endpoint");
+            }
+
             var filteredData = response.Data.Data
                 .OrderByDescending(x => x.Confirmed)
                 .Take(10)

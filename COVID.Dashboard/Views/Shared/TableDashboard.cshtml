@@ -1,30 +1,41 @@
 ﻿@model COVID.Dashboard.Models.CovidDataViewModel
 
-<div class="row">
-    <div class="col" id="report-area">
-        @Html.ActionLink("XML", "GetXmlForRegion", "Download", new { iso = Model.IsoCode }, new { @class = "btn btn-primary" })
-        @Html.ActionLink("JSON", "GetJsonFileForRegion", "Download", new { iso = Model.IsoCode }, new { @class = "btn btn-primary" })
-        @Html.ActionLink("CSV", "GetCvsForRegion", "Download", new { iso = Model.IsoCode }, new { @class = "btn btn-primary" })
+@if (Model.Top10RegionsData.Any())
+{
+    <div class="row">
+        <div class="col" id="report-area">
+            @Html.ActionLink("XML", "GetXmlForRegion", "Download", new { iso = Model.IsoCode }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("JSON", "GetJsonFileForRegion", "Download", new { iso = Model.IsoCode }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("CSV", "GetCvsForRegion", "Download", new { iso = Model.IsoCode }, new { @class = "btn btn-primary" })
+        </div>
     </div>
-</div>
-<div class="row mt-2">
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Region</th>
-            <th>Cases</th>
-            <th>Deaths</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Model.Top10RegionsData)
-        {
+    <div class="row mt-2">
+        <table class="table table-bordered">
+            <thead>
             <tr>
-                <td>@item.Key</td>
-                <td>@item.Value.Cases</td>
-                <td>@item.Value.Deaths</td>
+                <th>Region</th>
+                <th>Cases</th>
+                <th>Deaths</th>
             </tr>
-        }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Top10RegionsData)
+            {
+                <tr>
+                    <td>@item.Key</td>
+                    <td>@item.Value.Cases</td>
+                    <td>@item.Value.Deaths</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="alert alert-warning">
+            There was an error, please try again later
+        </div>
+    </div>
+}

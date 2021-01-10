@@ -9,9 +9,9 @@ namespace COVID.Dashboard.Models
 {
     public class CovidDataViewModel
     {
-        public Dictionary<string, CasesDeathModel> Top10RegionsData { get; set; }
+        public Dictionary<string, CasesDeathModel> Top10RegionsData { get; set; } = new Dictionary<string, CasesDeathModel>();
 
-        public List<SelectListItem> OptionsList { get; set; }
+        public List<SelectListItem> OptionsList { get; set; } = new List<SelectListItem>();
         public string IsoCode { get; set; }
     }
 }

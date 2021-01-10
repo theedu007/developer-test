@@ -16,6 +16,9 @@
                     const tableArea = $("#table-area");
                     tableArea.empty();
                     tableArea.append(respose);
+                },
+                error: (request, status, error) => {
+                    debugger;
                 }
             });
         });
