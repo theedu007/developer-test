@@ -62,7 +62,7 @@ namespace COVID.Dashboard.Buisness.Implementation
                 .OrderByDescending(x => x.Confirmed)
                 .Take(10)
                 .ToDictionary(
-                    x => new ProvinceIsoModel() { Province = x.Region.Province, Iso = x.Region.Iso },
+                    x => new ProvinceIsoModel() { Province = string.IsNullOrEmpty(x.Region.Province) ? x.Region.Name : x.Region.Province, Iso = x.Region.Iso },
                     x => new CasesDeathModel() { Cases = x.Confirmed, Deaths = x.Deaths });
             return filteredData;
         }
