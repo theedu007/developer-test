@@ -21,22 +21,23 @@ namespace COVID.Dashboard.Controllers
 
         public ActionResult Index()
         {
+            var model = new CovidDataViewModel();
             var viewData = _reportService.GetTop10RegionsMostCovidCases();
-            return View(new CovidDataViewModel() {Top10RegionsData = viewData});
+
+            model.Top10RegionsData = viewData.ToDictionary(x => x.Key.RegionName, x => x.Value);
+            model.OptionsList = viewData
+                .Select(x => new SelectListItem() {Value = x.Key.Iso, Text = x.Key.RegionName})
+                .ToList(); 
+            return View(model);
         }
 
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult GetDashboardByProvincePartialView(string iso)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var viewData = _reportService.GetTop10CovidCasesProvincesByRegion(iso);
+            var model = new CovidDataViewModel();
+            model.Top10RegionsData = viewData.ToDictionary(x => x.Key.Province, x => x.Value);
+            return PartialView("TableDashboard", model);
         }
     }
 }

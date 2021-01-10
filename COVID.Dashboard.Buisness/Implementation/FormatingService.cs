@@ -15,7 +15,6 @@ namespace COVID.Dashboard.Buisness.Implementation
 {
     public static class FormatingService
     {
-
         public static byte[] GeJsonBytes<T>(T data)
         {
             var json = JsonConvert.SerializeObject(data);

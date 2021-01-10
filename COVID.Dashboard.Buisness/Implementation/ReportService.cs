@@ -38,5 +38,21 @@ namespace COVID.Dashboard.Buisness.Implementation
                 .ToDictionary(x => new IsoRegionModel() {Iso = x.Key.Iso, RegionName = x.Key.Name}, x => x.Value);
             return filtererData;
         }
+
+        public Dictionary<ProvinceIsoModel, CasesDeathModel> GetTop10CovidCasesProvincesByRegion(string iso)
+        {
+            var client = _apiClient.GetRestClient();
+            var request = _apiClient.GetRestRequest("reports");
+            request.AddParameter("iso", iso, ParameterType.QueryString);
+            var response = client.Get<ReportDataDTO>(request);
+            var filteredData = response.Data.Data
+                .OrderByDescending(x => x.Confirmed)
+                .Take(10)
+                .ToDictionary(
+                    x => new ProvinceIsoModel() { Province = x.Region.Province, Iso = x.Region.Iso },
+                    x => new CasesDeathModel() { Cases = x.Confirmed, Deaths = x.Deaths });
+            return filteredData;
+        }
+
     }
 }
