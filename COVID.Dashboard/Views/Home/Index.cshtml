@@ -12,6 +12,10 @@
                 url: "/home/GetDashboardByProvincePartialView",
                 method: "GET",
                 data: { iso: $("#select-list").val() },
+                beforeSend: () => {
+                    const tableArea = $("#table-area");
+                    tableArea.empty();
+                    tableArea.append('<div class="alert alert-primary" role="alert">Loading...</div>');                },
                 success: (respose) => {
                     const tableArea = $("#table-area");
                     tableArea.empty();
